@@ -18,8 +18,6 @@ const TodoList = () => {
     });
   });
 
-  console.log('Filtered Todos:', filteredTodos);
-
   return (
     <ul>
       <li className="my-2 text-sm italic">All Your Notes Here...</li>

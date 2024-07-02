@@ -1,5 +1,5 @@
-// Todo.js
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TodoList from './TodoList';
 import FilterButtons from './FilterButtons';
@@ -12,6 +12,15 @@ const Todo = () => {
   const dispatch = useDispatch();
   const [newTask, setNewTask] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    savedTasks.forEach(task => dispatch(addTask(task)));
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleAddTask = (text) => {
     dispatch(addTask(text));
